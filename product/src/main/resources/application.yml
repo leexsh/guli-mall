@@ -1,12 +1,3 @@
-spring:
-  application:
-    name: product
-  datasource:
-    username: root
-    password: Lizheng123
-    url: jdbc:mysql://47.104.98.71:3306/guli_pms
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -14,3 +5,8 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
+
+
+server:
+  port: 7004
+

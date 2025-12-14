@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: query
+            uri:
+              htt
+            predicates:
+              - Query=foo, ba
+server:
+  port: 70007

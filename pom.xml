@@ -7,14 +7,81 @@
     <artifactId>mall</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!-- 父工程打包方式必须为 pom -->
     <packaging>pom</packaging>
+    <!-- 子模块声明 -->
     <modules>
         <module>product</module>
+        <module>coupon</module>
+        <module>member</module>
+        <module>ware</module>
+        <module>order</module>
+        <module>common</module>
+        <module>gateway</module>
     </modules>
+
+    <!-- 核心：继承 Spring Boot 父工程（所有子模块共享 Spring Boot 版本） -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.12</version>
+        <relativePath/> <!-- 从仓库拉取，无需本地路径 -->
+    </parent>
+
+    <!-- 统一版本变量（所有子模块可直接引用） -->
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-cloud.version>2024.0.2</spring-cloud.version>
+        <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
+        <lombok.version>1.18.42</lombok.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <httpcore.version>4.4.16</httpcore.version>
     </properties>
 
+    <!-- 全局依赖管控（所有子模块继承，无需重复声明版本） -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 1. Spring Cloud 版本管控 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 2. Spring Cloud Alibaba 版本管控（适配 Spring Boot 3.4.12 + Java 21） -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 3. MyBatis-Plus 版本管控 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- 4. 通用依赖版本管控 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

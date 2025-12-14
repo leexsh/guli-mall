@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ware  # 对应Nacos的dataId=coupon.yml
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848  # Nacos地址
+        group: DEFAULT_GROUP         # 分组（默认就是这个，显式写避免歧义）
+        import-check:
+          enabled: false
+        file-extension: yml
+  config:
+    import:
+      # Nacos 3.0+推荐写法：指定命名空间
+      - nacos:ware.yml?server-addr=127.0.0.1:8848&group=DEFAULT_GROUP&namespace=public
