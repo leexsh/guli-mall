@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.util.List;
+
 /**
  * 商品三级分类
  * @TableName pms_category
@@ -190,6 +192,17 @@ public class Category {
     public void setProductCount(Integer productCount) {
         this.productCount = productCount;
     }
+
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Category> children) {
+        this.children = children;
+    }
+
+    @TableField(exist = false)
+    public List<Category> children;
 
     @Override
     public boolean equals(Object that) {
