@@ -2,13 +2,24 @@ spring:
   application:
     name: gateway
   cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848  # Nacos地址
+        group: DEFAULT_GROUP         # 分组（默认就是这个，显式写避免歧义）
+        import-check:
+          enabled: false
+        file-extension: yml
     gateway:
-      mvc:
-        routes:
-          - id: query
-            uri:
-              htt
-            predicates:
-              - Query=foo, ba
+      server:  # 新增 server 节点（适配新规范）
+        webflux:
+          routes:  # 原 routes 移到 webflux 下
+            - id: product_route
+              uri: lb://product
+              predicates:
+                - Path=/api/product/**
+              filters:
+                - RewritePath=/api/(?<segment>.*),/$\{segment}
 server:
-  port: 70007
+  port: 7100
