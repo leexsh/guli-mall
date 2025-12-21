@@ -17,4 +17,6 @@ import java.util.Map;
 public interface CategoryService extends IService<Category> {
     PageUtils queryPage(Map<String, Object> params);
     List<Category> listWithTree();
+    void removeMenuByIds(List<Long> ids);
+    void updateCategory(Category category);
 }

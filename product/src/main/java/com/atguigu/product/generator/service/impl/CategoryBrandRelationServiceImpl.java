@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandRelationMapper, CategoryBrandRelation>
     implements CategoryBrandRelationService{
-
+    @Override
+    public void updateCategory(Long catId, String name) {
+        baseMapper.updateCategory(catId, name);
+    }
 }
 
 

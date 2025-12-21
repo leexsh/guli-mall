@@ -9,4 +9,6 @@ mybatis-plus:
 
 server:
   port: 7004
-
+logging:
+  level:
+    com.atguigu.product: debug

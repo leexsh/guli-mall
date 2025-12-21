@@ -1,9 +1,6 @@
 package com.atguigu.product.generator.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +38,7 @@ public class Category {
      * 是否显示[0-不显示，1显示]
      */
     @TableField(value = "show_status")
+    @TableLogic(value = "1", delval = "0")
     private Integer showStatus;
 
     /**

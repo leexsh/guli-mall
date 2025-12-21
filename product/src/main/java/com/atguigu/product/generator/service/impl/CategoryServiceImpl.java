@@ -8,6 +8,7 @@ import com.atguigu.utils.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     implements CategoryService{
+
+    @Autowired
+    CategoryBrandRelationServiceImpl categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -45,6 +49,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
                    return (m1.getSort() == null ? 0 : m1.getSort())- (m2.getSort() == null ? 0 : m2.getSort());
                }).toList();
         return res;
+    }
+
+    @Override
+    public void removeMenuByIds(List<Long> ids) {
+        baseMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
     }
 
     public List<Category> getChildren(Category category, List<Category> categories) {

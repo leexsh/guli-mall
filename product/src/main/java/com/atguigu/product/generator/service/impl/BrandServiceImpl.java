@@ -1,10 +1,17 @@
 package com.atguigu.product.generator.service.impl;
 
+import com.alibaba.cloud.commons.lang.StringUtils;
+import com.atguigu.utils.PageUtils;
+import com.atguigu.utils.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.product.generator.domain.Brand;
 import com.atguigu.product.generator.service.BrandService;
 import com.atguigu.product.generator.mapper.BrandMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -15,6 +22,33 @@ import org.springframework.stereotype.Service;
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
     implements BrandService{
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        //1、获取key
+        String key = (String) params.get("key");
+        QueryWrapper<Brand> queryWrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(key)) {
+            queryWrapper.eq("brand_id", key).or().like("name", key);
+        }
+
+        IPage<Brand> page = this.page(
+                new Query<Brand>().getPage(params),
+                queryWrapper
+
+        );
+
+        return new PageUtils(page);
+    }
+
+    @Override
+    public void updateDetail(Brand brand) {
+        this.updateById(brand);
+        if (!StringUtils.isEmpty(brand.getName())) {
+            //同步更新其他关联表中的数据
+//            categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
+
+        }
+    }
 }
 
 

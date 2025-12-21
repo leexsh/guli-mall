@@ -1,7 +1,10 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.Brand;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -10,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface BrandService extends IService<Brand> {
 
+    PageUtils queryPage(Map<String, Object> params);
+
+    void updateDetail(Brand brand);
 }

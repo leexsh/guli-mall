@@ -2,6 +2,7 @@ package com.atguigu.product.generator.mapper;
 
 import com.atguigu.product.generator.domain.CategoryBrandRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author zhenglee
@@ -10,6 +11,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.product.generator.domain.CategoryBrandRelation
 */
 public interface CategoryBrandRelationMapper extends BaseMapper<CategoryBrandRelation> {
+
+    void updateCategory(@Param("catId") Long catId, @Param("name") String name);
 
 }
 
