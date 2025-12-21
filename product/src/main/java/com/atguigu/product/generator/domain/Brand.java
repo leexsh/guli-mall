@@ -1,9 +1,14 @@
 package com.atguigu.product.generator.domain;
 
+import com.atguigu.valid.AddGroup;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.update.Update;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 
 /**
  * 品牌
@@ -14,12 +19,15 @@ public class Brand {
     /**
      * 品牌id
      */
+    @NotNull(groups = {Update.class})
+    @Null(groups = {AddGroup.class})
     @TableId(value = "brand_id", type = IdType.AUTO)
     private Long brandId;
 
     /**
      * 品牌名
      */
+    @NotBlank(message = "品牌名不为空")
     @TableField(value = "name")
     private String name;
 

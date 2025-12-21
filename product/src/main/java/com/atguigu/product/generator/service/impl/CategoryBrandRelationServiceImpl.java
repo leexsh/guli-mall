@@ -1,10 +1,13 @@
 package com.atguigu.product.generator.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.product.generator.domain.CategoryBrandRelation;
 import com.atguigu.product.generator.service.CategoryBrandRelationService;
 import com.atguigu.product.generator.mapper.CategoryBrandRelationMapper;
 import org.springframework.stereotype.Service;
+
+import java.sql.Wrapper;
 
 /**
 * @author zhenglee
@@ -17,6 +20,14 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public void updateCategory(Long catId, String name) {
         baseMapper.updateCategory(catId, name);
+    }
+
+    @Override
+    public void updateBrand(Long brandId, String name) {
+        CategoryBrandRelation categoryBrandRelation = new CategoryBrandRelation();
+        categoryBrandRelation.setBrandId(brandId);
+        categoryBrandRelation.setBrandName(name);
+        baseMapper.update(categoryBrandRelation, new UpdateWrapper<CategoryBrandRelation>().eq("brand_id", brandId));
     }
 }
 

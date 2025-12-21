@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.product.generator.domain.Brand;
 import com.atguigu.product.generator.service.BrandService;
 import com.atguigu.product.generator.mapper.BrandMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -22,6 +23,9 @@ import java.util.Map;
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
     implements BrandService{
 
+    @Autowired
+    CategoryBrandRelationServiceImpl categoryBrandRelationService;
+    
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         //1、获取key
@@ -45,7 +49,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
         this.updateById(brand);
         if (!StringUtils.isEmpty(brand.getName())) {
             //同步更新其他关联表中的数据
-//            categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
+            categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
 
         }
     }

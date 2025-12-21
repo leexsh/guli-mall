@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface CategoryBrandRelationService extends IService<CategoryBrandRelation> {
 
     void updateCategory(Long catId, String name);
+    void updateBrand(Long brandId, String name);
 }
