@@ -2,6 +2,9 @@ package com.atguigu.product.generator.mapper;
 
 import com.atguigu.product.generator.domain.Attr;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import feign.Param;
+
+import java.util.List;
 
 /**
 * @author zhenglee
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface AttrMapper extends BaseMapper<Attr> {
 
+    List<Long> selectSearchAttrsIds(@Param("attrIds") List<Long> attrIds);
 }
 
 

@@ -1,7 +1,11 @@
 package com.atguigu.product.generator.mapper;
 
 import com.atguigu.product.generator.domain.AttrGroup;
+import com.atguigu.product.vo.SpuItemAttrGroupVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import feign.Param;
+
+import java.util.List;
 
 /**
 * @author zhenglee
@@ -10,7 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.product.generator.domain.AttrGroup
 */
 public interface AttrGroupMapper extends BaseMapper<AttrGroup> {
-
+    List<SpuItemAttrGroupVo> getAttrGroupWithAttrsBySpuId(@Param("spuId") Long spuId, @Param("catalogId") Long catalogId);
 }
 
 

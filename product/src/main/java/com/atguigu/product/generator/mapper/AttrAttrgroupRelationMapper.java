@@ -2,6 +2,9 @@ package com.atguigu.product.generator.mapper;
 
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import feign.Param;
+
+import java.util.List;
 
 /**
 * @author zhenglee
@@ -10,6 +13,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.product.generator.domain.AttrAttrgroupRelation
 */
 public interface AttrAttrgroupRelationMapper extends BaseMapper<AttrAttrgroupRelation> {
+
+    void deleteBatchRelation(@Param("entities") List<AttrAttrgroupRelation> entities);
 
 }
 

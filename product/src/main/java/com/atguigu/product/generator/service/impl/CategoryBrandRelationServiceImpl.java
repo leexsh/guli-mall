@@ -1,10 +1,9 @@
 package com.atguigu.product.generator.service.impl;
 
-import com.atguigu.product.dao.BrandDao;
-import com.atguigu.product.dao.CategoryBrandRelationDao;
-import com.atguigu.product.dao.CategoryDao;
 import com.atguigu.product.generator.domain.Brand;
 import com.atguigu.product.generator.domain.Category;
+import com.atguigu.product.generator.mapper.BrandMapper;
+import com.atguigu.product.generator.mapper.CategoryMapper;
 import com.atguigu.product.generator.service.BrandService;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.Query;
@@ -34,11 +33,11 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     implements CategoryBrandRelationService{
 
     @Autowired
-    BrandDao brandDao;
+    BrandMapper brandDao;
     @Autowired
-    CategoryDao categoryDao;
+    CategoryMapper categoryDao;
     @Autowired
-    CategoryBrandRelationDao categoryBrandRelationDao;
+    CategoryBrandRelationMapper categoryBrandRelationDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

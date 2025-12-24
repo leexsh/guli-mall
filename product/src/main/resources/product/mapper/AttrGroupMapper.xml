@@ -16,4 +16,28 @@
     <sql id="Base_Column_List">
         attr_group_id,attr_group_name,sort,descript,icon,catelog_id
     </sql>
+
+    <resultMap id="spuAttrGroup" type="com.atguigu.product.vo.SpuItemAttrGroupVo">
+        <result property="groupName" column="attr_group_name"/>
+        <collection property="attrs" ofType="com.atguigu.product.vo.AttrVoEntitiy">
+            <result property="attrId" column="attr_id"/>
+            <result property="attrName" column="attr_name"/>
+            <result property="attrValue" column="attr_value"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAttrGroupWithAttrsBySpuId" resultMap="spuAttrGroup">
+        SELECT product.spu_id,
+               pag.attr_group_id,
+               pag.attr_group_name,
+               product.attr_id,
+               product.attr_name,
+               product.attr_value
+        FROM pms_product_attr_value product
+                 LEFT JOIN pms_attr_attrgroup_relation paar ON product.attr_id = paar.attr_id
+                 LEFT JOIN pms_attr_group pag ON paar.attr_group_id = pag.attr_group_id
+        WHERE product.spu_id = #{spuId}
+          AND pag.catelog_id = #{catalogId}
+
+    </select>
 </mapper>

@@ -25,7 +25,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
 
     @Autowired
     CategoryBrandRelationServiceImpl categoryBrandRelationService;
-    
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         //1、获取key

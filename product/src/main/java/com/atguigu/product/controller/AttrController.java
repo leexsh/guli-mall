@@ -3,6 +3,7 @@ package com.atguigu.product.controller;
 import com.atguigu.product.generator.domain.ProductAttrValue;
 import com.atguigu.product.generator.service.AttrService;
 import com.atguigu.product.generator.service.ProductAttrValueService;
+import com.atguigu.product.vo.AttrRespVo;
 import com.atguigu.product.vo.AttrVo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.R;
@@ -97,7 +98,7 @@ public class AttrController {
     public R updateSpuAttr(@PathVariable("spuId") Long spuId,
                            @RequestBody List<ProductAttrValue> entities){
 
-        productAttrValueService.update`SpuAttr(spuId,entities);
+        productAttrValueService.updateSpuAttr(spuId,entities);
 
         return R.ok();
     }

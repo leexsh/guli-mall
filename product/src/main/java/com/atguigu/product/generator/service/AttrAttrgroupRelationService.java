@@ -1,9 +1,11 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
+import com.atguigu.product.vo.AttrGroupRelationVo;
 import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,4 +16,5 @@ import java.util.Map;
 public interface AttrAttrgroupRelationService extends IService<AttrAttrgroupRelation> {
 
     PageUtils queryPage(Map<String, Object> params);
+    void saveBatch(List<AttrGroupRelationVo> collections);
 }

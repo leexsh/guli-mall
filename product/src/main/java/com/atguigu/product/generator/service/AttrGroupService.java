@@ -1,9 +1,12 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.AttrGroup;
+import com.atguigu.product.vo.AttrGroupWithAttrsVo;
+import com.atguigu.product.vo.SpuItemAttrGroupVo;
 import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,5 +16,15 @@ import java.util.Map;
 */
 public interface AttrGroupService extends IService<AttrGroup> {
 
+
+    PageUtils queryPage(Map<String, Object> params);
+
     PageUtils queryPage(Map<String, Object> params, Long catelogId);
+
+    List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId);
+
+    List<SpuItemAttrGroupVo> getAttrGroupWithAttrsBySpuId(Long spuId, Long catalogId);
+
+
+
 }

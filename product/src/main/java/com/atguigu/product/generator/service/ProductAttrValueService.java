@@ -1,7 +1,11 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.ProductAttrValue;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -10,4 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ProductAttrValueService extends IService<ProductAttrValue> {
 
+    PageUtils queryPage(Map<String, Object> params);
+
+    void saveProductAttr(List<ProductAttrValue> collect);
+
+    List<ProductAttrValue> baseAttrListforspu(Long spuId);
+
+    void updateSpuAttr(Long spuId, List<ProductAttrValue> entities);
 }

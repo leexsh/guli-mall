@@ -1,8 +1,10 @@
 package com.atguigu.product.generator.service.impl;
 
+import com.alibaba.nacos.shaded.io.grpc.EquivalentAddressGroup.Attr;
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
 import com.atguigu.product.generator.mapper.AttrAttrgroupRelationMapper;
 import com.atguigu.product.generator.service.AttrAttrgroupRelationService;
+import com.atguigu.product.vo.AttrGroupRelationVo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,7 +12,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * @author zhenglee
@@ -28,6 +33,18 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void saveBatch(List<AttrGroupRelationVo> collections) {
+        List<AttrAttrgroupRelation> list = collections.stream().map(item -> {
+            AttrAttrgroupRelation relation = new AttrAttrgroupRelation();
+            relation.setAttrId(item.getAttrId());
+            relation.setAttrGroupId(item.getAttrGroupId());
+            return relation;
+        }).collect(Collectors.toList());
+
+        this.saveBatch(list);
     }
 
 }
