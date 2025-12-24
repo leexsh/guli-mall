@@ -1,10 +1,17 @@
 package com.atguigu.coupon.generator.service.impl;
 
+import com.atguigu.coupon.generator.domain.HomeSubjectSpu;
+import com.atguigu.utils.PageUtils;
+import com.atguigu.utils.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.coupon.generator.domain.MemberPrice;
 import com.atguigu.coupon.generator.service.MemberPriceService;
 import com.atguigu.coupon.generator.mapper.MemberPriceMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -15,6 +22,15 @@ import org.springframework.stereotype.Service;
 public class MemberPriceServiceImpl extends ServiceImpl<MemberPriceMapper, MemberPrice>
     implements MemberPriceService{
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        IPage<MemberPrice> page = this.page(
+                new Query<MemberPrice>().getPage(params),
+                new QueryWrapper<MemberPrice>()
+        );
+
+        return new PageUtils(page);
+    }
 }
 
 

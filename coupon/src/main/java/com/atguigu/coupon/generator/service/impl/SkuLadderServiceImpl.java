@@ -1,10 +1,16 @@
 package com.atguigu.coupon.generator.service.impl;
 
+import com.atguigu.utils.PageUtils;
+import com.atguigu.utils.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.coupon.generator.domain.SkuLadder;
 import com.atguigu.coupon.generator.service.SkuLadderService;
 import com.atguigu.coupon.generator.mapper.SkuLadderMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -15,6 +21,15 @@ import org.springframework.stereotype.Service;
 public class SkuLadderServiceImpl extends ServiceImpl<SkuLadderMapper, SkuLadder>
     implements SkuLadderService{
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        IPage<SkuLadder> page = this.page(
+                new Query<SkuLadder>().getPage(params),
+                new QueryWrapper<SkuLadder>()
+        );
+
+        return new PageUtils(page);
+    }
 }
 
 

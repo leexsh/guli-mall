@@ -1,7 +1,10 @@
 package com.atguigu.coupon.generator.service;
 
 import com.atguigu.coupon.generator.domain.CouponSpuCategoryRelation;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -9,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-12-13 21:35:42
 */
 public interface CouponSpuCategoryRelationService extends IService<CouponSpuCategoryRelation> {
-
+    PageUtils queryPage(Map<String, Object> params);
 }

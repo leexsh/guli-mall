@@ -1,7 +1,10 @@
 package com.atguigu.coupon.generator.service;
 
 import com.atguigu.coupon.generator.domain.Coupon;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -10,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CouponService extends IService<Coupon> {
 
+
+    PageUtils queryPage(Map<String, Object> params);
 }

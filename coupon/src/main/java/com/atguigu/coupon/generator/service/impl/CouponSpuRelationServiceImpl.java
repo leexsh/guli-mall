@@ -1,10 +1,16 @@
 package com.atguigu.coupon.generator.service.impl;
 
+import com.atguigu.utils.PageUtils;
+import com.atguigu.utils.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.coupon.generator.domain.CouponSpuRelation;
 import com.atguigu.coupon.generator.service.CouponSpuRelationService;
 import com.atguigu.coupon.generator.mapper.CouponSpuRelationMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -15,6 +21,15 @@ import org.springframework.stereotype.Service;
 public class CouponSpuRelationServiceImpl extends ServiceImpl<CouponSpuRelationMapper, CouponSpuRelation>
     implements CouponSpuRelationService{
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        IPage<CouponSpuRelation> page = this.page(
+                new Query<CouponSpuRelation>().getPage(params),
+                new QueryWrapper<CouponSpuRelation>()
+        );
+
+        return new PageUtils(page);
+    }
 }
 
 

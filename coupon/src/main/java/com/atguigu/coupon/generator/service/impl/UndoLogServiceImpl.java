@@ -1,8 +1,8 @@
 package com.atguigu.coupon.generator.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.coupon.generator.domain.UndoLog;
-import com.atguigu.coupon.generator.service.UndoLogService;
 import com.atguigu.coupon.generator.mapper.UndoLogMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class UndoLogServiceImpl extends ServiceImpl<UndoLogMapper, UndoLog>
-    implements UndoLogService{
+    implements IService<UndoLog> {
 
 }
 

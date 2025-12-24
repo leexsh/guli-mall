@@ -1,10 +1,17 @@
 package com.atguigu.coupon.generator.service.impl;
 
+import com.atguigu.coupon.generator.domain.HomeSubjectSpu;
+import com.atguigu.utils.PageUtils;
+import com.atguigu.utils.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.coupon.generator.domain.SeckillPromotion;
 import com.atguigu.coupon.generator.service.SeckillPromotionService;
 import com.atguigu.coupon.generator.mapper.SeckillPromotionMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -15,6 +22,15 @@ import org.springframework.stereotype.Service;
 public class SeckillPromotionServiceImpl extends ServiceImpl<SeckillPromotionMapper, SeckillPromotion>
     implements SeckillPromotionService{
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        IPage<SeckillPromotion> page = this.page(
+                new Query<SeckillPromotion>().getPage(params),
+                new QueryWrapper<SeckillPromotion>()
+        );
+
+        return new PageUtils(page);
+    }
 }
 
 
