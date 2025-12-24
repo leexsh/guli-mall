@@ -1,7 +1,10 @@
 package com.atguigu.member.generator.service;
 
 import com.atguigu.member.generator.domain.GrowthChangeHistory;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -9,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-12-13 21:48:49
 */
 public interface GrowthChangeHistoryService extends IService<GrowthChangeHistory> {
-
+    PageUtils queryPage(Map<String, Object> params);
 }

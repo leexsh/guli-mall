@@ -1,7 +1,10 @@
 package com.atguigu.member.generator.service;
 
 import com.atguigu.member.generator.domain.MemberStatisticsInfo;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -9,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-12-13 21:48:50
 */
 public interface MemberStatisticsInfoService extends IService<MemberStatisticsInfo> {
-
+    PageUtils queryPage(Map<String, Object> params);
 }

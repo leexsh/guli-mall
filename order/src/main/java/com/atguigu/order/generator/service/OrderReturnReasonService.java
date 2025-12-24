@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-12-13 21:56:33
 */
 public interface OrderReturnReasonService extends IService<OrderReturnReason> {
-
+    PageUtils queryPage(Map<String, Object> params);
 }

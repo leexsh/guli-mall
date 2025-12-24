@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-12-13 21:56:33
 */
 public interface OrderSettingService extends IService<OrderSetting> {
-
+    PageUtils queryPage(Map<String, Object> params);
 }
