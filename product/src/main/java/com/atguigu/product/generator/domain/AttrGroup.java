@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
  * 属性分组
  * @TableName pms_attr_group
  */
+@Data
 @TableName(value ="pms_attr_group")
 public class AttrGroup {
     /**
@@ -46,6 +48,10 @@ public class AttrGroup {
      */
     @TableField(value = "catelog_id")
     private Long catelogId;
+
+    @TableField(exist = false)
+    private Long[] catelogPath;
+
 
     /**
      * 分组id

@@ -1,6 +1,7 @@
 package com.atguigu.product.generator.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
@@ -199,6 +200,7 @@ public class Category {
         this.children = children;
     }
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @TableField(exist = false)
     public List<Category> children;
 

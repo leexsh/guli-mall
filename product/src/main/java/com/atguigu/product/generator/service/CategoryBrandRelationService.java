@@ -1,7 +1,12 @@
 package com.atguigu.product.generator.service;
 
+import com.atguigu.product.generator.domain.Brand;
 import com.atguigu.product.generator.domain.CategoryBrandRelation;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -10,6 +15,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryBrandRelationService extends IService<CategoryBrandRelation> {
 
+    PageUtils queryPage(Map<String, Object> params);
+
+    void saveDetail(CategoryBrandRelation categoryBrandRelation);
+
     void updateCategory(Long catId, String name);
     void updateBrand(Long brandId, String name);
+
+    List<Brand> getBrandsByCatId(Long catId);
 }

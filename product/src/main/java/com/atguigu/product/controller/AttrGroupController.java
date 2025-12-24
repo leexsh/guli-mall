@@ -3,6 +3,7 @@ package com.atguigu.product.controller;
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
 import com.atguigu.product.generator.domain.AttrGroup;
 import com.atguigu.product.generator.service.AttrGroupService;
+import com.atguigu.product.generator.service.CategoryService;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,23 @@ public class AttrGroupController {
     @Autowired
     private AttrGroupService attrGroupService;
 
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/list/{catelogId}")
     public R list(@RequestParam Map<String, Object> params, @PathVariable("catelogId") Long catelogId) {
         PageUtils page = attrGroupService.queryPage(params, catelogId);
         return R.ok().put("page", page);
+    }
+
+    @RequestMapping("/info/{attrGroupId}")
+    public R info(@PathVariable("attrGroupId") Long attrGroupId) {
+        AttrGroup attrGroup = attrGroupService.getById(attrGroupId);
+        Long catelogId = attrGroup.getCatelogId();
+        Long[] path = categoryService.findCatalogPath(catelogId);
+
+        attrGroup.setCatelogPath(path);
+        return R.ok().put("attrGroup", attrGroup);
     }
 
     @RequestMapping("/save")

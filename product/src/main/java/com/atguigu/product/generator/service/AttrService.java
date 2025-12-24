@@ -1,7 +1,11 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.Attr;
+import com.atguigu.product.vo.AttrVo;
+import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author zhenglee
@@ -10,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface AttrService extends IService<Attr> {
 
+    PageUtils queryPage(Map<String, Object> params);
+
+    void saveAttr(AttrVo attr);
 }

@@ -50,7 +50,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
         if (!StringUtils.isEmpty(brand.getName())) {
             //同步更新其他关联表中的数据
             categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
-
         }
     }
 }
