@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.member.generator.domain.MemberLevel
 */
 public interface MemberLevelMapper extends BaseMapper<MemberLevel> {
-
+    MemberLevel getDefaultMemberLevel();
 }
 
 

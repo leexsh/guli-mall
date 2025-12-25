@@ -4,6 +4,7 @@ import com.atguigu.utils.PageUtils;
 import com.atguigu.ware.generator.domain.PurchaseDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,4 +14,7 @@ import java.util.Map;
 */
 public interface PurchaseDetailService extends IService<PurchaseDetail> {
     PageUtils queryPage(Map<String, Object> params);
+    List<PurchaseDetail> listDetailByPurchaseId(Long id);
+
+
 }

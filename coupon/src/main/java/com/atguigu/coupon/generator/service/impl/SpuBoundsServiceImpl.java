@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【sms_spu_bounds(商品spu积分设置)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("spuBoundsService")
 public class SpuBoundsServiceImpl extends ServiceImpl<SpuBoundsMapper, SpuBounds>
     implements SpuBoundsService{
 

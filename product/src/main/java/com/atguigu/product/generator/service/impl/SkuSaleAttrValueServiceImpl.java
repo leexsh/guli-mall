@@ -19,7 +19,7 @@ import java.util.Map;
 * @description 针对表【pms_sku_sale_attr_value(sku销售属性&值)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:03
 */
-@Service
+@Service("skuSaleAttrValueService")
 public class SkuSaleAttrValueServiceImpl extends ServiceImpl<SkuSaleAttrValueMapper, SkuSaleAttrValue>
     implements SkuSaleAttrValueService{
 

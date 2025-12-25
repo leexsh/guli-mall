@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 * @description 针对表【pms_category(商品三级分类)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:02
 */
-@Service
+@Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     implements CategoryService{
 
@@ -92,6 +92,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
                 .collect(Collectors.toList());
     }
 
+    private List<Category> getParentCid(List<Category> selectList, Long parentCid) {
+        return selectList.stream().filter(item -> item.getParentCid().equals(parentCid)).collect(Collectors.toList());
+    }
 }
 
 

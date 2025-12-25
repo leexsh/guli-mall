@@ -18,7 +18,7 @@ import java.util.Map;
 * @description 针对表【sms_seckill_session(秒杀活动场次)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("seckillSessionService")
 public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionMapper, SeckillSession>
     implements SeckillSessionService{
 

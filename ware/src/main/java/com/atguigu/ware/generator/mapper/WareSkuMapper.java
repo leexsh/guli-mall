@@ -2,6 +2,7 @@ package com.atguigu.ware.generator.mapper;
 
 import com.atguigu.ware.generator.domain.WareSku;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import feign.Param;
 
 /**
 * @author zhenglee
@@ -10,7 +11,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.atguigu.ware.generator.domain.WareSku
 */
 public interface WareSkuMapper extends BaseMapper<WareSku> {
+    void addStock(@Param("skuId") Long skuId, @Param("wareId") Long wareId, @Param("skuNum") Integer skuNum);
 
+    Long getSkuStock(@Param("skuId") Long skuId);
 }
 
 

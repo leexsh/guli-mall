@@ -12,7 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Service
+/**
+ * @author zhenglee
+ * @description 针对表【pms_spu_info_desc(商品介绍)】的数据库操作Service实现
+ * @createDate 2025-12-14 14:59:03
+ */
+@Service("spuInfoDescService")
 public class SpuInfoDescServiceImpl extends ServiceImpl<SpuInfoDescMapper, SpuInfoDesc>
     implements SpuInfoDescService{
 

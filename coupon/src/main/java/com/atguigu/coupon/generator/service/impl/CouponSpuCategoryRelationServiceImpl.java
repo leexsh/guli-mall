@@ -18,7 +18,7 @@ import java.util.Map;
 * @description 针对表【sms_coupon_spu_category_relation(优惠券分类关联)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("couponSpuCategoryRelationService")
 public class CouponSpuCategoryRelationServiceImpl extends ServiceImpl<CouponSpuCategoryRelationMapper, CouponSpuCategoryRelation>
     implements CouponSpuCategoryRelationService{
 

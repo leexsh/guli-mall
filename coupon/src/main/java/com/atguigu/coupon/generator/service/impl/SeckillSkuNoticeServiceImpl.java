@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【sms_seckill_sku_notice(秒杀商品通知订阅)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("seckillSkuNoticeService")
 public class SeckillSkuNoticeServiceImpl extends ServiceImpl<SeckillSkuNoticeMapper, SeckillSkuNotice>
     implements SeckillSkuNoticeService{
 

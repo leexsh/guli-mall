@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 * @description 针对表【pms_sku_info(sku信息)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:03
 */
-@Service
+@Service("skuInfoService")
 public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
     implements SkuInfoService{
 

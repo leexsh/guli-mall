@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 * @description 针对表【pms_spu_images(spu图片)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:03
 */
-@Service
+@Service("spuImagesService")
 public class SpuImagesServiceImpl extends ServiceImpl<SpuImagesMapper, SpuImages>
     implements SpuImagesService{
 

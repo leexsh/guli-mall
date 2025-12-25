@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【sms_sku_ladder(商品阶梯价格)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("skuLadderService")
 public class SkuLadderServiceImpl extends ServiceImpl<SkuLadderMapper, SkuLadder>
     implements SkuLadderService{
 

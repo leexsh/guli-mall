@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【sms_home_adv(首页轮播广告)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("homeAdvService")
 public class HomeAdvServiceImpl extends ServiceImpl<HomeAdvMapper, HomeAdv>
     implements HomeAdvService{
 

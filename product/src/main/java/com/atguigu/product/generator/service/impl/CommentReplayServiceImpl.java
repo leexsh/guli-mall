@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【pms_comment_replay(商品评价回复关系)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:02
 */
-@Service
+@Service("commentReplayService")
 public class CommentReplayServiceImpl extends ServiceImpl<CommentReplayMapper, CommentReplay>
     implements CommentReplayService{
 

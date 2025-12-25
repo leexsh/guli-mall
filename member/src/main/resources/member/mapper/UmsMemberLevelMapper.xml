@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.atguigu.member.generator.mapper.UmsMemberLevelMapper">
+<mapper namespace="com.atguigu.member.generator.mapper.MemberLevelMapper">
 
-    <resultMap id="BaseResultMap" type="com.atguigu.coupon.generator.domain.UmsMemberLevel">
+    <resultMap id="BaseResultMap" type="com.atguigu.member.generator.domain.MemberLevel">
             <id property="id" column="id" />
             <result property="name" column="name" />
             <result property="growthPoint" column="growth_point" />
@@ -21,4 +21,8 @@
         id,name,growth_point,default_status,free_freight_point,comment_growth_point,
         priviledge_free_freight,priviledge_member_price,priviledge_birthday,note
     </sql>
+    <select id="getDefaultLevel" resultType="com.atguigu.member.generator.domain.MemberLevel">
+        SELECT * FROM ums_member_level WHERE default_status = 1
+    </select>
+
 </mapper>

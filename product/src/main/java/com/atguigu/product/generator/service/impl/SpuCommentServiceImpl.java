@@ -17,7 +17,7 @@ import java.util.Map;
 * @description 针对表【pms_spu_comment(商品评价)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:03
 */
-@Service
+@Service("spuCommentService")
 public class SpuCommentServiceImpl extends ServiceImpl<SpuCommentMapper, SpuComment>
     implements SpuCommentService{
 

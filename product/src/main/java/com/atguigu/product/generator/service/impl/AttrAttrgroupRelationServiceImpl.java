@@ -1,6 +1,5 @@
 package com.atguigu.product.generator.service.impl;
 
-import com.alibaba.nacos.shaded.io.grpc.EquivalentAddressGroup.Attr;
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
 import com.atguigu.product.generator.mapper.AttrAttrgroupRelationMapper;
 import com.atguigu.product.generator.service.AttrAttrgroupRelationService;
@@ -12,7 +11,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +20,7 @@ import java.util.stream.Collectors;
 * @description 针对表【pms_attr_attrgroup_relation(属性&属性分组关联)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:02
 */
-@Service
+@Service("attrAttrgroupRelationService")
 public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupRelationMapper, AttrAttrgroupRelation>
     implements AttrAttrgroupRelationService{
     @Override

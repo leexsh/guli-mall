@@ -2,13 +2,15 @@ package com.atguigu.product.generator.service.impl;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.atguigu.constant.ProductConstant;
+import com.atguigu.product.generator.domain.Attr;
 import com.atguigu.product.generator.domain.AttrAttrgroupRelation;
 import com.atguigu.product.generator.domain.AttrGroup;
 import com.atguigu.product.generator.domain.Category;
 import com.atguigu.product.generator.mapper.AttrAttrgroupRelationMapper;
 import com.atguigu.product.generator.mapper.AttrGroupMapper;
+import com.atguigu.product.generator.mapper.AttrMapper;
 import com.atguigu.product.generator.mapper.CategoryMapper;
-import com.atguigu.product.generator.service.AttrAttrgroupRelationService;
+import com.atguigu.product.generator.service.AttrService;
 import com.atguigu.product.generator.service.CategoryService;
 import com.atguigu.product.vo.AttrGroupRelationVo;
 import com.atguigu.product.vo.AttrRespVo;
@@ -18,15 +20,15 @@ import com.atguigu.utils.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.product.generator.domain.Attr;
-import com.atguigu.product.generator.service.AttrService;
-import com.atguigu.product.generator.mapper.AttrMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +36,7 @@ import java.util.stream.Collectors;
 * @description 针对表【pms_attr(商品属性)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:02
 */
-@Service
+@Service("attrService")
 public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr>
     implements AttrService{
 

@@ -19,7 +19,7 @@ import java.util.Map;
 * @description 针对表【pms_brand(品牌)】的数据库操作Service实现
 * @createDate 2025-12-14 14:59:02
 */
-@Service
+@Service("brandService")
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand>
     implements BrandService{
 

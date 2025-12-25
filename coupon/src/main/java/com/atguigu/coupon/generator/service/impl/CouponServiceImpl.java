@@ -18,7 +18,7 @@ import java.util.Map;
 * @description 针对表【sms_coupon(优惠券信息)】的数据库操作Service实现
 * @createDate 2025-12-13 21:35:42
 */
-@Service
+@Service("couponService")
 public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon>
     implements CouponService{
 
