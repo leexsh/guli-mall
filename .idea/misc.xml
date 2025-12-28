@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/third_party/pom.xml" />
         <option value="$PROJECT_DIR$/search/pom.xml" />
         <option value="$PROJECT_DIR$/es-search/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-search/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
