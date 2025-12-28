@@ -13,11 +13,15 @@
         <option value="$PROJECT_DIR$/gw/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/third_party/pom.xml" />
+        <option value="$PROJECT_DIR$/search/pom.xml" />
+        <option value="$PROJECT_DIR$/es-search/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/es-search/pom.xml" />
         <option value="$PROJECT_DIR$/gw/pom.xml" />
+        <option value="$PROJECT_DIR$/search/pom.xml" />
       </set>
     </option>
   </component>

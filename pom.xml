@@ -18,6 +18,8 @@
         <module>order</module>
         <module>common</module>
         <module>gateway</module>
+        <module>third_party</module>
+        <module>mall-search</module>
     </modules>
 
     <!-- 核心：继承 Spring Boot 父工程（所有子模块共享 Spring Boot 版本） -->
