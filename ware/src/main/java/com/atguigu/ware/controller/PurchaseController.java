@@ -24,8 +24,7 @@ public class PurchaseController {
     @PostMapping("/done")
     public R finish(@RequestBody PurchaseDoneVo doneVo){
 
-//        todo lizheng
-//        purchaseService.done(doneVo);
+        purchaseService.done(doneVo);
 
         return R.ok();
     }
@@ -37,8 +36,7 @@ public class PurchaseController {
     @PostMapping("/received")
     public R received(@RequestBody List<Long> ids){
 
-//        todo lizheng
-//        purchaseService.received(ids);
+        purchaseService.received(ids);
 
         return R.ok();
     }
@@ -48,19 +46,16 @@ public class PurchaseController {
     @PostMapping("/merge")
     public R merge(@RequestBody MergeVo mergeVo){
 
-//        todo lizheng
-//        purchaseService.mergePurchase(mergeVo);
+        purchaseService.mergePurchase(mergeVo);
         return R.ok();
     }
 
     @RequestMapping("/unreceive/list")
     //@RequiresPermissions("ware:purchase:list")
     public R unreceivelist(@RequestParam Map<String, Object> params){
-//        PageUtils page = purchaseService.queryPageUnreceivePurchase(params);
+        PageUtils page = purchaseService.queryPageUnreceivePurchase(params);
 
-//        return R.ok().put("page", page);
-//        todo lizheng
-        return R.ok();
+        return R.ok().put("page", page);
     }
 
     /**

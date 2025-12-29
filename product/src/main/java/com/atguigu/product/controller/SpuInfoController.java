@@ -25,7 +25,7 @@ public class SpuInfoController {
      */
     @PostMapping("/{spuId}/up")
     public R upSpu(@PathVariable Long spuId) {
-//        spuInfoService.up(spuId);
+        spuInfoService.up(spuId);
         return R.ok();
     }
 

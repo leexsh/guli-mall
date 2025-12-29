@@ -4,6 +4,7 @@ import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.R;
 import com.atguigu.ware.generator.domain.WareSku;
 import com.atguigu.ware.generator.service.WareSkuService;
+import com.atguigu.ware.vo.SkuHasStockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,9 +47,7 @@ public class WareSkuController {
      */
     @PostMapping(value = "/hasStock")
     public R getSkuHasStock(@RequestBody List<Long> skuIds) {
-        //skuId stock
-        // todo lizheng
-//        List<SkuHasStockVo> vos = wareSkuService.getSkuHasStock(skuIds);
+        List<SkuHasStockVo> vos = wareSkuService.getSkuHasStock(skuIds);
 
         return R.ok();
 //        return R.ok().setData(vos);

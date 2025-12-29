@@ -1,17 +1,22 @@
 package com.atguigu.product.generator.service.impl;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
+import com.atguigu.product.feign.SeckillFeignService;
+import com.atguigu.product.generator.domain.SkuImages;
+import com.atguigu.product.generator.domain.SkuInfo;
+import com.atguigu.product.generator.domain.SpuInfoDesc;
+import com.atguigu.product.generator.mapper.SkuInfoMapper;
+import com.atguigu.product.generator.service.*;
 import com.atguigu.product.vo.SkItemVo;
+import com.atguigu.product.vo.SkuItemSaleAttrVo;
 import com.atguigu.product.vo.SkuItemVo;
+import com.atguigu.product.vo.SpuItemAttrGroupVo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.product.generator.domain.SkuInfo;
-import com.atguigu.product.generator.service.SkuInfoService;
-import com.atguigu.product.generator.mapper.SkuInfoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
 * @author zhenglee
@@ -29,9 +33,27 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service("skuInfoService")
 public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
     implements SkuInfoService{
+    @Resource
+    private SkuImagesService skuImagesService;
+
+    @Resource
+    private SpuInfoDescService spuInfoDescService;
+
+    @Resource
+    private AttrGroupService attrGroupService;
+
+    @Resource
+    private SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @Resource
+    private SeckillFeignService seckillFeignService;
 
 
-//    @Autowired
+    public SkuInfoServiceImpl(SkuSaleAttrValueServiceImpl skuSaleAttrValueService) {
+        this.skuSaleAttrValueService = skuSaleAttrValueService;
+    }
+
+    //    @Autowired
 //    private ThreadPoolExecutor executor;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -110,13 +132,35 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
 
     @Override
     public SkuItemVo item(Long skuId) throws ExecutionException, InterruptedException {
-        // todo lizheng
         SkItemVo skuItemVo = new SkItemVo();
         CompletableFuture<SkuInfo> skuInfoCompletableFuture = CompletableFuture.supplyAsync(() -> {
             SkuInfo info = this.getById(skuId);
             skuItemVo.setInfo(info);
             return info;
         } );
+        CompletableFuture<Void> saleAttrFuture = skuInfoCompletableFuture.thenAcceptAsync(skuInfo -> {
+            List<SkuItemSaleAttrVo> saleVos = skuSaleAttrValueService.getSaleAttrBySpuId(skuInfo.getSpuId());
+            skuItemVo.setSaleAttr(saleVos);
+        });
+        CompletableFuture<Void> descFuture = skuInfoCompletableFuture.thenAcceptAsync((res) -> {
+            //4、获取spu的介绍    pms_spu_info_desc
+            SpuInfoDesc spuInfoDescEntity = spuInfoDescService.getById(res.getSpuId());
+            skuItemVo.setDesc(spuInfoDescEntity);
+        });
+
+
+        CompletableFuture<Void> baseAttrFuture = skuInfoCompletableFuture.thenAcceptAsync((res) -> {
+            //5、获取spu的规格参数信息
+            List<SpuItemAttrGroupVo> attrGroupVos = attrGroupService.getAttrGroupWithAttrsBySpuId(res.getSpuId(), res.getCatalogId());
+            skuItemVo.setGroupAttrs(attrGroupVos);
+        });
+
+        CompletableFuture<Void> imageFuture = CompletableFuture.runAsync(() -> {
+            List<SkuImages> imagesEntities = skuImagesService.getImagesBySkuId(skuId);
+            skuItemVo.setImages(imagesEntities);
+        });
+        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
+
         return null;
     }
 }
