@@ -16,12 +16,14 @@
         <option value="$PROJECT_DIR$/search/pom.xml" />
         <option value="$PROJECT_DIR$/es-search/pom.xml" />
         <option value="$PROJECT_DIR$/mall-search/pom.xml" />
+        <option value="$PROJECT_DIR$/search-es/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/es-search/pom.xml" />
         <option value="$PROJECT_DIR$/gw/pom.xml" />
+        <option value="$PROJECT_DIR$/mall-search/pom.xml" />
         <option value="$PROJECT_DIR$/search/pom.xml" />
       </set>
     </option>
