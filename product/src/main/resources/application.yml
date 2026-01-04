@@ -12,3 +12,7 @@ server:
 logging:
   level:
     com.atguigu.product: debug
+
+redis:
+  host: 127.0.0.1
+  port: 6379

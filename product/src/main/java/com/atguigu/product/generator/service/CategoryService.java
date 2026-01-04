@@ -1,6 +1,7 @@
 package com.atguigu.product.generator.service;
 
 import com.atguigu.product.generator.domain.Category;
+import com.atguigu.product.vo.Catelogs2Vo;
 import com.atguigu.utils.PageUtils;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,19 @@ public interface CategoryService extends IService<Category> {
     Long[] findCatalogPath(Long catelogId);
 
     void updateCascade(Category category);
+
+    /**
+     * 查找一级分类，首页显示
+     *
+     * @return
+     */
+    List<Category> getLevel1Categories();
+
+    /**
+     * 查找二级、三级分类，首页显示
+     *
+     * @return
+     */
+    Map<String, List<Catelogs2Vo>> getCatalogJson();
 }
 

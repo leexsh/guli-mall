@@ -1,18 +1,27 @@
 package com.atguigu.product.generator.service.impl;
 
+import com.alibaba.cloud.commons.lang.StringUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.atguigu.product.generator.domain.Category;
 import com.atguigu.product.generator.mapper.CategoryMapper;
 import com.atguigu.product.generator.service.CategoryService;
+import com.atguigu.product.vo.Catelogs2Vo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.redisson.api.RReadWriteLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +34,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     implements CategoryService{
 
     @Autowired
+    private StringRedisTemplate redisTemplate;
+    @Autowired
     CategoryBrandRelationServiceImpl categoryBrandRelationService;
+    @Autowired
+    private RedissonClient redissonClient;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -79,6 +92,72 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     public void updateCascade(Category category) {
         this.updateById(category);
         categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
+    }
+
+    @Override
+    public List<Category> getLevel1Categories() {
+        System.out.println("get Level 1 Categories........");
+        long l = System.currentTimeMillis();
+        List<Category> categoryEntities = this.baseMapper.selectList(
+                new QueryWrapper<Category>().eq("parent_cid", 0));
+        System.out.println("消耗时间：" + (System.currentTimeMillis() - l));
+        return categoryEntities;
+    }
+
+    @Override
+    public Map<String, List<Catelogs2Vo>> getCatalogJson() {
+        String catalogJSON = redisTemplate.opsForValue().get("catalogJSON");
+        if (StringUtils.isEmpty(catalogJSON)) {
+            // 2. 缓存中没有，查询数据库
+            Map<String, List<Catelogs2Vo>> catalogJsonFromDB = getCatalogJsonFromDB();
+            // 3. 查询到的数据存放到缓存中，将对象转成 JSON 存储
+            redisTemplate.opsForValue().set("catalogJSON", JSON.toJSONString(catalogJsonFromDB));
+            return getCatelogJsonFromDBWithRedisLock();
+        }
+        return JSON.parseObject(catalogJSON, new TypeReference<Map<String, List<Catelogs2Vo>>>() {
+        });
+    }
+
+    public Map<String, List<Catelogs2Vo>> getCatalogJsonFromDbWithRedissonLock() {
+        RReadWriteLock rwlock = redissonClient.getReadWriteLock("catalogJSON-lock");
+        rwlock.writeLock().lock();
+        try {
+            // 2. 缓存中没有，查询数据库
+            Map<String, List<Catelogs2Vo>> catalogJsonFromDB = getCatalogJsonFromDB();
+            // 3. 查询到的数据存放到缓存中，将对象转成 JSON 存储
+            redisTemplate.opsForValue().set("catalogJSON", JSON.toJSONString(catalogJsonFromDB));
+            return catalogJsonFromDB;
+        } finally {
+            rwlock.writeLock().unlock();
+        }
+    }
+
+    public Map<String, List<Catelogs2Vo>> getCatelogJsonFromDBWithRedisLock() {
+        String uuid = UUID.randomUUID().toString();
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent("lock", uuid, 3, TimeUnit.SECONDS);
+        if (lock) {
+            // 2. 缓存中没有，查询数据库
+            try {
+                Map<String, List<Catelogs2Vo>> catalogJsonFromDB = getCatalogJsonFromDB();
+                // 3. 查询到的数据存放到缓存中，将对象转成 JSON 存储
+                redisTemplate.opsForValue().set("catalogJSON", JSON.toJSONString(catalogJsonFromDB));
+                return catalogJsonFromDB;
+            } finally {
+                String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+                redisTemplate.execute(new DefaultRedisScript<>(script, Long.class), Collections.singletonList("lock"), uuid);
+            }
+        } else {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return getCatelogJsonFromDBWithRedisLock();
+        }
+    }
+
+    public Map<String, List<Catelogs2Vo>> getCatalogJsonFromDB() {
+        return Map.of();
     }
 
     public List<Category> getChildren(Category category, List<Category> categories) {
