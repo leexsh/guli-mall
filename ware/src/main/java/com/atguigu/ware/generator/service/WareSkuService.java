@@ -1,8 +1,11 @@
 package com.atguigu.ware.generator.service;
 
+import com.atguigu.to.OrderTo;
+import com.atguigu.to.StockLockedTo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.ware.generator.domain.WareSku;
 import com.atguigu.ware.vo.SkuHasStockVo;
+import com.atguigu.ware.vo.WareSkuLockVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -24,4 +27,9 @@ public interface WareSkuService extends IService<WareSku> {
      * @return
      */
     List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds);
+    Boolean orderLockStock(WareSkuLockVo vo);
+
+    void unlockStock(StockLockedTo to);
+
+    void unlockStock(OrderTo orderTo);
 }

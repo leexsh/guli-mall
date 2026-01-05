@@ -1,6 +1,8 @@
 package com.atguigu.ware.generator.service.impl;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
+import com.atguigu.to.OrderTo;
+import com.atguigu.to.StockLockedTo;
 import com.atguigu.utils.PageUtils;
 import com.atguigu.utils.Query;
 import com.atguigu.utils.R;
@@ -9,6 +11,7 @@ import com.atguigu.ware.generator.domain.WareSku;
 import com.atguigu.ware.generator.mapper.WareSkuMapper;
 import com.atguigu.ware.generator.service.WareSkuService;
 import com.atguigu.ware.vo.SkuHasStockVo;
+import com.atguigu.ware.vo.WareSkuLockVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -97,6 +100,21 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuMapper, WareSku>
             skuHasStockVo.setHasStock(count>0);
             return skuHasStockVo;
         }).toList();
+    }
+
+    @Override
+    public Boolean orderLockStock(WareSkuLockVo vo) {
+        return null;
+    }
+
+    @Override
+    public void unlockStock(StockLockedTo to) {
+
+    }
+
+    @Override
+    public void unlockStock(OrderTo orderTo) {
+
     }
 }
 
